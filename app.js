@@ -46,6 +46,10 @@ app.get("/newOffer",(req,res) => {
     res.render('newOffer');
 });
 
+app.get("/newStudent/save",(req,res) => {
+    
+})
+
 app.listen(3000,function(){
     console.log('Server starting on port 3000');
 })
