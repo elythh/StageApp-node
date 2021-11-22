@@ -14,11 +14,11 @@
         <div class="container w-full mb-20">
             <div class="container flex flex-col list">
                     <% offres.forEach(function(offre) { %>
-                        <div class="bg-white text-base w-5/6 md:w-1/2 lg:w-1/3 rounded-lg shadow m-auto border border-b-8 border-black mt-5 card">
-                            <div class="p-4 flex flex-col"> <%= offre.titre %></div>
-                            <h3 class="text-4xl"> <%= offre.entrepriseName %> </h3>
-                            <div class="text-gray-800"><%= offre.competences %></div>
-                            <p class="my-4"><%= offre.contenu  %></p>
+                        <div class="bg-white text-base w-5/6 md:w-1/2 lg:w-1/3 rounded-lg shadow-lg m-auto border-b-8 border-black mt-5 card">
+                            <div class="p-4 flex flex-col"> Titre de l'offre :  <%= offre.titre %></div>
+                            <h3 class="mx-4 text-4xl"> Entreprise : <%= offre.entrepriseName %> </h3>
+                            <div class="mx-4 text-gray-800"> Type  : <%= offre.competences %></div>
+                            <p class=" mx-4 my-4">Durée : <%= offre.contenu  %></p>
                         </div>
                      <% }); %>
             </div>

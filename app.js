@@ -13,7 +13,6 @@ app.get("/",(req,res) => {
 });
 
 app.get("/etudiants", (req, res) => {
-    
     try {
         axios.get("http://127.0.0.1:8080/etudiants").then(response => {
             var etudiants = response.data;
@@ -21,16 +20,19 @@ app.get("/etudiants", (req, res) => {
     });
     }
     catch (err) {
-        console.log(err)
+        res.render('error');
     }
 })
 
 app.get("/offres", (req, res) => {
+    res.render('login');
+})
+
+app.get("/offres/all", (req, res) => {
     try {
         axios.get("http://127.0.0.1:8080/offres").then(response => {
             var offres = response.data;
             res.render('offres',{offres: offres});
-
     });
     }
     catch (err) {
@@ -46,9 +48,14 @@ app.get("/newOffer",(req,res) => {
     res.render('newOffer');
 });
 
-app.get("/newStudent/save",(req,res) => {
-    
-})
+app.use(function(req, res, next) {
+    res.status(404);
+  
+    if (req.accepts('html')) {
+        res.render('./partials/error', { url: req.url });
+        return;
+    }
+});
 
 app.listen(3000,function(){
     console.log('Server starting on port 3000');

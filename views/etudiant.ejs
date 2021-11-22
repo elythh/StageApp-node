@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/views/style.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function getCV(id){
+            axios.get('http://localhost:8080/etudiants/'+id.toString()+'/cv').then(response => {
+                down
+            })
+        }
+        
+        function getLm(id){
+            axios.get('http://localhost:8080/etudiants/'+id.toString()+'/lm').then(response => {
+                console.log(response.data);
+            })
+        }
+    </script>
     <head>
         <%- include('partials/header'); %>
     </head>
@@ -13,24 +26,38 @@
     <body class="font-Poppins bg-gray-50">
         <div class="container w-full mb-20">
             <div class="container flex flex-col list">
-                    <% etudiants.forEach(function(etudiant) { %>
-                        <div class="bg-white text-base w-5/6 md:w-1/2 lg:w-1/3 rounded-lg shadow m-auto border border-b-8 border-black mt-5 card">
-                            <div class="p-4 flex flex-col"> <%= etudiant.nom %></div>
-                            <h3 class="text-4xl"> <%= etudiant.prenom %> </h3>
-                            <div class="text-gray-800"><%= etudiant.competences %></div>
-                            <p class="my-4"><%= etudiant.description %></p>
-                            <div class="container flex flex-row">
-                                <div class="container flex flex-row justify-start">
-                                    <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  m-1  rounded-lg text-center"  href=<%= etudiant.linkedInLink %>>LinkedIn</a>
-                                    <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  m-1  rounded-lg text-center"  href=<%= etudiant.mail %>>email</a>
-                                </div>
-                                <div class="container flex flex-row justify-end">
-                                    <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  m-1  rounded-lg text-center"  href=<%= etudiant.cv %>>CV</a>
-                                    <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  m-1  rounded-lg text-center"  href=<%= etudiant.lm %>>Lettre</a>
-                                </div>
+                <% etudiants.forEach(function(etudiant) { %>
+                    <div class=" w-5/6 md:w-1/2 lg:w-1/3 px-4 py-3 mx-auto bg-white rounded-md shadow-md mt-5 dark:bg-gray-800">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-light text-green-800">Candidature</span>
+                            <span class="px-3 py-1 text-xs text-green-800 uppercase bg-green-200 rounded-full ">Cyberlog</span>
+                        </div>
+                
+                        <div>
+                            <h1 class="mt-2 text-lg font-semibold text-gray-800 dark:text-white"> <%= etudiant.nom %>  <%= etudiant.prenom %></h1>
+                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300"><%= etudiant.description %></p>
+                        </div>
+                
+                        <div>
+                            <div class="flex items-center mt-2 text-gray-700 dark:text-gray-200">
+                                <span>Contactez-moi sur</span>
+                                <a class="mx-2 text-green-600 cursor-pointer dark:text-blue-400 hover:underline" href=<%= etudiant.linkedInLink %>>LinkedIn</a>
+                                <span>ou par</span>
+                                <a class="mx-2 text-green-600 cursor-pointer dark:text-blue-400 hover:underline" href="mailto:"<%= etudiant.mail %>>mail</a>
+                            </div>
+                
+                            <div class="flex items-center justify-center mt-4">
+                                <a class="mr-2 text-green-800 cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" onclick="getCV('<%= etudiant.id %>')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
+                                </a>
+                
+                                <a class="mr-2 text-green-800 cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" onclick="getLm('<%= etudiant.id %>')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V9l-7-7z"/><path d="M13 3v6h6"/></svg>
+                                </a>
                             </div>
                         </div>
-                     <% }); %>
+                    </div>
+                <% }); %>
             </div>
         </div>
         <footer class="w-full bg-green-100 bottom-0">
