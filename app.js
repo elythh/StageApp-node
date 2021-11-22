@@ -28,7 +28,7 @@ app.get("/offres", (req, res) => {
     res.render('login');
 })
 
-app.get("/offres/all", (req, res) => {
+app.get("/offres/confirmes", (req, res) => {
     try {
         axios.get("http://127.0.0.1:8080/offres").then(response => {
             var offres = response.data;
@@ -40,6 +40,13 @@ app.get("/offres/all", (req, res) => {
     }
 })
 
+app.post("/offres/admin", (req, res) => {
+    console.log(req.headers['content-type']);
+    console.log(req.body);
+    console.log(req.body.password);
+});
+
+
 app.get("/newStudent",(req,res) => {
     res.render('newStudent');
 });
@@ -50,7 +57,6 @@ app.get("/newOffer",(req,res) => {
 
 app.use(function(req, res, next) {
     res.status(404);
-  
     if (req.accepts('html')) {
         res.render('./partials/error', { url: req.url });
         return;
