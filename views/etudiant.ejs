@@ -9,7 +9,7 @@
     <script>
         function getCV(id){
             axios.get('http://localhost:8080/etudiants/'+id.toString()+'/cv').then(response => {
-                down
+                window.open(response);
             })
         }
         
@@ -47,11 +47,10 @@
                             </div>
                 
                             <div class="flex items-center justify-center mt-4">
-                                <a class="mr-2 text-green-800 cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" onclick="getCV('<%= etudiant.id %>')">
+                                <a class="mr-2 text-green-800 cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" download="CV" onclick='window.open("http://localhost:8080/etudiants/<%= etudiant.id %>/cv")'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
                                 </a>
-                
-                                <a class="mr-2 text-green-800 cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" onclick="getLm('<%= etudiant.id %>')">
+                                <a class="mr-2 text-green-800 cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" onclick='window.open("http://localhost:8080/etudiants/<%= etudiant.id %>/lm")'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V9l-7-7z"/><path d="M13 3v6h6"/></svg>
                                 </a>
                             </div>
